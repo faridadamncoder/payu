@@ -1,0 +1,122 @@
+[
+ {
+  "name": "Mata Gerinda Potong 107 mm",
+  "price": 6000,
+  "stock": 120,
+  "weight": 60,
+  "category": "Mata Gerinda",
+  "sold": 420,
+  "image": "gerinda-potong.jpg",
+  "description": "Mata potong untuk gerinda tangan ukuran 4 inci. Dipakai memotong besi, plat, dan pipa. Isi 1 keping. Tersedia juga ukuran 183 mm untuk gerinda besar."
+ },
+ {
+  "name": "Mata Gerinda Gurinda 183 mm",
+  "price": 22000,
+  "stock": 45,
+  "weight": 280,
+  "category": "Mata Gerinda",
+  "sold": 160,
+  "image": "gerinda-poles.jpg",
+  "description": "Mata gerinda untuk menggerinda permukaan besi dan menghaluskan bekas las. Diameter 183 mm, dipakai pada gerinda besar. Isi 1 keping."
+ },
+ {
+  "name": "Elektroda Las 2,7 mm 1 kg",
+  "price": 38000,
+  "stock": 60,
+  "weight": 1100,
+  "category": "Alat Las",
+  "sold": 210,
+  "image": "elektroda-las.jpg",
+  "description": "Kawat las untuk mesin las listrik, diameter 2,7 mm, dikemas 1 kilogram. Cocok untuk las besi konstruksi dan perbaikan rangka. Tersedia juga diameter 3,2 mm."
+ },
+ {
+  "name": "Mesin Las Listrik Inverter 450 Watt",
+  "price": 585000,
+  "stock": 6,
+  "weight": 4500,
+  "category": "Alat Las",
+  "sold": 34,
+  "image": "mesin-las.jpg",
+  "description": "Mesin las listrik jenis inverter, ringan dan gampang dibawa. Bisa dipakai di rumah dengan listrik rumah tangga. Sudah termasuk kabel dan holder. Garansi toko 1 bulan."
+ },
+ {
+  "name": "Kunci Pas Ratchet Set 24 Pcs",
+  "price": 265000,
+  "stock": 9,
+  "weight": 1800,
+  "category": "Hand Tool",
+  "sold": 78,
+  "image": "kunci-ratchet.jpg",
+  "description": "Satu set kunci pas ratchet dengan 24 mata ukuran 6 sampai 24 mm. Disimpan dalam kotak plastik, jadi tidak tercecer. Untuk bongkar pasang motor dan mesin."
+ },
+ {
+  "name": "Tang Ampere Digital",
+  "price": 145000,
+  "stock": 14,
+  "weight": 350,
+  "category": "Hand Tool",
+  "sold": 52,
+  "image": "tang-ampere.jpg",
+  "description": "Tang ampere digital untuk mengukur arus listrik tanpa memutus kabel. Bisa juga untuk ukur tegangan dan tahanan. Cocok buat yang sering kerjakan instalasi listrik bengkel."
+ },
+ {
+  "name": "Mesin Bor Duduk 13 mm",
+  "price": 1250000,
+  "stock": 4,
+  "weight": 14000,
+  "category": "Power Tool",
+  "sold": 18,
+  "image": "bor-duduk.jpg",
+  "description": "Bor duduk untuk melubangi besi dan kayu dengan hasil lebih presisi daripada bor tangan. Kapasitas chuck 13 mm, sudah termasuk mata bor dasar. Berat sekitar 14 kg, diambil di toko atau kirim dengan ongkos terpisah."
+ },
+ {
+  "name": "Gerinda Tangan 4 Inci",
+  "price": 385000,
+  "stock": 7,
+  "weight": 2200,
+  "category": "Power Tool",
+  "sold": 96,
+  "image": "gerinda-tangan.jpg",
+  "description": "Gerinda tangan ukuran 4 inci, satu paket dengan handle samping dan kunci pemasangan mata. Sudah terpasang kabel standar. Garansi toko 2 minggu."
+ },
+ {
+  "name": "Sarung Tangan Las Kulit",
+  "price": 45000,
+  "stock": 30,
+  "weight": 250,
+  "category": "Alat Las",
+  "sold": 140,
+  "image": "sarung-las.jpg",
+  "description": "Sarung tangan kulit untuk kerja las dan kerja bengkel. Menahan panas percikan las sampai batas tertentu. Harga per pasang."
+ },
+ {
+  "name": "Topeng Las Kepala",
+  "price": 85000,
+  "stock": 12,
+  "weight": 600,
+  "category": "Alat Las",
+  "sold": 64,
+  "image": "topeng-las.jpg",
+  "description": "Topeng las model dipakai di kepala, jadi kedua tangan bebas memegang logam. Lensa bisa diganti. Harga termurah dari merek yang kami stok."
+ },
+ {
+  "name": "Baut dan Mur Campuran 1 Kg",
+  "price": 35000,
+  "stock": 40,
+  "weight": 1050,
+  "category": "Sparepart",
+  "sold": 190,
+  "image": "baut-mur.jpg",
+  "description": "Baut dan mur campur ukuran 8 sampai 14 mm, dijual per kilogram. Praktis buat bengkel yang sering butuh sparepart satuan. Ukuran bisa dipilih saat mengambil."
+ },
+ {
+  "name": "Mata Bor Besi HSS Set 10 Pcs",
+  "price": 55000,
+  "stock": 22,
+  "weight": 300,
+  "category": "Sparepart",
+  "sold": 118,
+  "image": "mata-bor.jpg",
+  "description": "Set mata bor HSS 10 buah ukuran 1 sampai 10 mm, disimpan dalam kotak. Untuk melubangi besi, aluminium, dan plastik. Bukan untuk beton."
+ }
+]

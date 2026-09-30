@@ -1,0 +1,194 @@
+// Payu — skema database multi-toko.
+// Default SQLite untuk development. Untuk production ganti provider ke "postgresql"
+// dan isi DATABASE_URL (lihat README).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  name         String
+  passwordHash String
+  createdAt    DateTime  @default(now())
+  sessions     Session[]
+  store        Store?
+}
+
+model Session {
+  id        String   @id // sha256 dari token cookie
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+model Store {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  ownerId         String   @unique
+  owner           User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  name            String
+  tagline         String   @default("")
+  description     String   @default("")
+  logoUrl         String   @default("")
+  bannerUrl       String   @default("")
+  whatsapp        String   @default("")
+  address         String   @default("")
+  city            String   @default("")
+  hours           String   @default("")
+  lat             Float?
+  lng             Float?
+  theme           String   @default("emerald")
+  // Pembayaran
+  qrisPayload     String   @default("") // string QRIS statis (EMVCo). Nominal disisipkan otomatis per pesanan.
+  qrisMerchant    String   @default("")
+  bankName        String   @default("")
+  bankAccount     String   @default("")
+  bankHolder      String   @default("")
+  paymentNote     String   @default("")
+  // Pengiriman
+  freeShippingMin Int      @default(0) // 0 = nonaktif
+  shippingJson    String   @default("[]") // ShippingOption[]
+  // CS
+  quickReplies    String   @default("[]") // string[]
+  // Langganan
+  plan            String   @default("starter")
+  planEndsAt      DateTime
+  isDemo          Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  products        Product[]
+  orders          Order[]
+  conversations   Conversation[]
+  subscriptionRequests SubscriptionRequest[]
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  storeId     String
+  store       Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  name        String
+  description String   @default("")
+  category    String   @default("Umum")
+  price       Int
+  stock       Int?     // null = tanpa batas (mis. produk digital)
+  weight      Int      @default(500) // gram
+  imageUrl    String   @default("")
+  active      Boolean  @default(true)
+  featured    Boolean  @default(false)
+  sold        Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  orderItems  OrderItem[]
+
+  @@index([storeId, active])
+}
+
+model Order {
+  id              String   @id @default(cuid())
+  storeId         String
+  store           Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  ref             String   @unique
+  accessToken     String   // rahasia untuk halaman lacak pesanan pembeli
+  status          String   @default("NEW")
+  customerName    String
+  customerPhone   String
+  customerAddress String   @default("")
+  customerLat     Float?
+  customerLng     Float?
+  note            String   @default("")
+  shippingMethod  String
+  shippingLabel   String
+  distanceKm      Float    @default(0)
+  shippingCost    Int
+  subtotal        Int
+  total           Int
+  paymentMethod   String   @default("qris") // qris | transfer | whatsapp
+  proofUrl        String   @default("")
+  proofHash       String?
+  trackingNumber  String   @default("")
+  conversationId  String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  items           OrderItem[]
+  events          OrderEvent[]
+
+  @@unique([storeId, proofHash])
+  @@index([storeId, status])
+  @@index([storeId, createdAt])
+}
+
+model OrderItem {
+  id        String   @id @default(cuid())
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String?
+  product   Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+  name      String
+  price     Int
+  qty       Int
+  imageUrl  String   @default("")
+}
+
+model OrderEvent {
+  id        String   @id @default(cuid())
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  status    String
+  note      String   @default("")
+  createdAt DateTime @default(now())
+
+  @@index([orderId])
+}
+
+model Conversation {
+  id             String    @id @default(cuid())
+  storeId        String
+  store          Store     @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  visitorKey     String    @unique // rahasia milik browser pembeli
+  customerName   String    @default("")
+  customerPhone  String    @default("")
+  unreadByStore  Int       @default(0)
+  unreadByCustomer Int     @default(0)
+  lastMessageAt  DateTime  @default(now())
+  createdAt      DateTime  @default(now())
+  messages       Message[]
+
+  @@index([storeId, lastMessageAt])
+}
+
+model Message {
+  id             String       @id @default(cuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender         String       // customer | store | system
+  body           String
+  attachmentUrl  String       @default("")
+  orderRef       String       @default("")
+  broadcast      Boolean      @default(false)
+  createdAt      DateTime     @default(now())
+
+  @@index([conversationId, createdAt])
+}
+
+model SubscriptionRequest {
+  id        String   @id @default(cuid())
+  storeId   String
+  store     Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  plan      String
+  months    Int      @default(1)
+  amount    Int
+  note      String   @default("")
+  status    String   @default("PENDING") // PENDING | APPROVED | REJECTED
+  createdAt DateTime @default(now())
+}
